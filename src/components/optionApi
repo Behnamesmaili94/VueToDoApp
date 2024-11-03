@@ -1,0 +1,99 @@
+<template>
+  <Heaer></Heaer>
+  <div id="head">
+  </div>
+
+  <ShowComponent>
+    <template v-slot:header>
+      <h1>this is the header </h1>
+      </template>
+      <template v-slot:body>
+        <div>
+          <p>this is the body</p>
+        </div>
+      </template>
+    <template v-slot:footer>
+      <footer>this is the footer</footer>
+    </template>
+  </ShowComponent>
+
+  <teleport to="#head"><img alt="Vue logo" src="./assets/logo.png"></teleport>
+  <br/>
+  <HelloWorld :id="id" :name="name" :family="family" @getText="showPopup" ref="CrefHellowWorld"/>
+  <button @click="gethelloWorld">getTextHelloWorldCref</button>
+  <Footer></Footer>
+</template>
+
+<script>
+import HelloWorld from "@/components/HelloWorld.vue";
+import ShowComponent from "@/components/ShowComponent.vue";
+import Heaer from "@/components/Heaer.vue";
+import Footer from "@/components/Footer.vue";
+
+export default {
+  name: 'App',
+  data(){
+    return{
+      id:1,
+      name:"mojataba",
+      family:"mokapo",
+    }
+  },
+  components:{
+    Footer,
+    Heaer,
+    ShowComponent,
+    HelloWorld,
+  },
+  methods:{
+    showPopup(event){
+      alert("my id is :"+ event)
+    },
+    gethelloWorld(){
+      alert(this.$refs.CrefHellowWorld.id)
+      this.id++
+    },
+  },
+  watch:{
+    id(){
+      console.log(this.id)
+    },
+  },
+  beforeCreate() {
+    console.log("before created")
+  },
+  created() {
+    console.log("created")
+  },
+  beforeMount() {
+    console.log("before Mounted")
+  },
+  mounted() {
+    console.log("Mounted")
+  },
+  beforeUpdate() {
+    console.log("before update")
+  },
+  updated() {
+    console.log("updated")
+  },
+  beforeUnmount() {
+    console.log("before Unmount")
+  },
+  unmounted() {
+    console.log("Unmount")
+  },
+}
+
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
